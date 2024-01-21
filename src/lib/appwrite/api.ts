@@ -68,6 +68,23 @@ export async function signInAccount(user: { email: string; password: string }) {
     };
   }
 }
+export async function signOutAccount() {
+  try {
+    const session = await account.deleteSession("current");
+    return {
+      content: session,
+      message: "Session deleted successfully.",
+      status: SUCCESS,
+    };
+  } catch (error) {
+    console.log({ "Sign Out Error": error });
+    return {
+      content: error,
+      message: "there is an error in singOutAccount",
+      status: ERROR,
+    };
+  }
+}
 export async function getCurrentUser() {
   try {
     const currentAccount = await account.get();
